@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}DRUG | Dashboard{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<p class="subtitle">Welcome back. Your frontend is now connected to a Flask backend with live demo data.</p>
+
+<section class="cards">
+    <div class="card">
+        <div class="card-label">Total Items</div>
+        <div class="card-value">{{ stats.total_items }}</div>
+        <div class="card-sub">Tracked medicines</div>
+    </div>
+    <div class="card">
+        <div class="card-label">Low Stock Alerts</div>
+        <div class="card-value text-red">{{ stats.low_stock }}</div>
+        <div class="card-sub">Needs restocking</div>
+    </div>
+    <div class="card">
+        <div class="card-label">Suppliers</div>
+        <div class="card-value">{{ stats.total_suppliers }}</div>
+        <div class="card-sub">Current partners</div>
+    </div>
+    <div class="card">
+        <div class="card-label">Transactions</div>
+        <div class="card-value">{{ stats.total_transactions }}</div>
+        <div class="card-sub">Recorded movements</div>
+    </div>
+</section>
+
+<section class="table-wrapper">
+    <div class="section_head">
+        <h2>Recent Inventory Snapshot</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td class="text-cyan">{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.quantity }}</td>
+                <td><span class="badge {{ 'badge-red' if item.status == 'Low Stock' else 'badge-green' }}">{{ item.status }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
