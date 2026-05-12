@@ -14,6 +14,12 @@ db.init_app(app)
 
 app.secret_key = "drug-capstone-secret-key"
 
+app.secret_key = "drug-capstone-secret-key"
+
+@app.route("/")
+def home():
+    return redirect(url_for("login"))
+
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "admin123"
 ADMIN_NAME = "Admin User"
